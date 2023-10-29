@@ -7,7 +7,7 @@
 - Render custom prompts, return any value
 - Just like `window.prompt`, the modal state is managed for you
 - Full TypeScript support
-- Less than 1.3kb minified and gzipped
+- 0.5kb minified and gzipped
 - Platform agnostic
 - Zero dependencies
 
