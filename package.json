@@ -1,0 +1,47 @@
+{
+  "name": "powerprompt",
+  "description": "Easily craft custom prompt modals in React with an intuitive API mirroring the classic prompt().",
+  "keywords": [
+    "react",
+    "prompt",
+    "modal",
+    "dialog"
+  ],
+  "license": "MIT",
+  "author": "Andrew Prifer (https://github.com/AndrewPrifer)",
+  "repository": "AndrewPrifer/powerprompt",
+  "bugs": "https://github.com/AndrewPrifer/powerprompt/issues",
+  "homepage": "https://github.com/AndrewPrifer/powerprompt",
+  "version": "0.0.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/main.cjs",
+  "module": "./dist/main.js",
+  "types": "./dist/main.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/main.js",
+      "require": "./dist/main.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsup"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.33",
+    "@types/react-dom": "^18.2.14",
+    "@vitejs/plugin-react": "^4.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  }
+}
