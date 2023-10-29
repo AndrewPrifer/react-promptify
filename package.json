@@ -12,7 +12,7 @@
   "repository": "AndrewPrifer/powerprompt",
   "bugs": "https://github.com/AndrewPrifer/powerprompt/issues",
   "homepage": "https://github.com/AndrewPrifer/powerprompt",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "files": [
     "dist"
