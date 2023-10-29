@@ -1,5 +1,5 @@
 {
-  "name": "powerprompt",
+  "name": "react-promptify",
   "description": "Easily craft custom prompt modals in React with an intuitive API mirroring the classic prompt().",
   "keywords": [
     "react",
@@ -9,9 +9,9 @@
   ],
   "license": "MIT",
   "author": "Andrew Prifer (https://github.com/AndrewPrifer)",
-  "repository": "AndrewPrifer/powerprompt",
-  "bugs": "https://github.com/AndrewPrifer/powerprompt/issues",
-  "homepage": "https://github.com/AndrewPrifer/powerprompt",
+  "repository": "AndrewPrifer/react-promptify",
+  "bugs": "https://github.com/AndrewPrifer/react-promptify/issues",
+  "homepage": "https://github.com/AndrewPrifer/react-promptify",
   "version": "0.1.0",
   "type": "module",
   "files": [

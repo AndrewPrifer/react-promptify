@@ -1,4 +1,4 @@
-# PowerPrompt
+# react-promptify
 
 `window.prompt` replacement for React. Render any prompt, return any value, right where you need it.
 
@@ -14,7 +14,7 @@
 ## Installation
 
 ```sh
-yarn add powerprompt
+yarn add react-promptify
 ```
 
 ## Quick start
@@ -56,7 +56,7 @@ function App() {
 
 Ever noticed that whenever you just need to get a simple value from the user, you have to add a bunch of boilerplate to your app? You have to create a modal component, manage the open state in the parent component (open state + onClose handler), add the modal to the component tree, pass in a handler for the data, then when you need the data, open the modal, wait for the user to enter the data, and then handle the data. Aside from the added complexity, it creates a lot of distance between where you need the data and where you handle it.
 
-With PowerPrompt, you define _once_ where and how you want to render modals, and call the `prompt()` function anywhere in your app to render a modal and get the data you need, _where_ you need it. The modal state is managed for you, you can render any content, and you can return any value you want.
+With promptify, you define _once_ where and how you want to render modals, and call the `prompt()` function anywhere in your app to render a modal and get the data you need, _where_ you need it. The modal state is managed for you, you can render any content, and you can return any value you want.
 
 ## API
 
