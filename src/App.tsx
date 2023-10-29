@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { Prompter, prompt } from "../lib/main";
 
 export function App() {
@@ -76,7 +76,7 @@ const MyOtherComponent = () => {
   return <button onClick={handleClick}>Click me</button>;
 };
 
-const promptEmail = async () =>
+const promptEmail = () =>
   prompt<{
     email: string;
     marketing: boolean;

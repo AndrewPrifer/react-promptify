@@ -1,5 +1,12 @@
 import { FC, ReactNode } from "react";
-import { PromptFn, createPrompt, dispatch, useStore } from "./Store";
+import {
+  PromptFn,
+  createPrompt,
+  dispatch,
+  useStore,
+  CallbackFn,
+  RenderFn,
+} from "./Store";
 
 interface PrompterProps {
   /**
@@ -51,3 +58,4 @@ const prompt: PromptFn = (render) => {
 };
 
 export { Prompter, prompt };
+export type { PrompterProps, PromptFn, CallbackFn, RenderFn };
