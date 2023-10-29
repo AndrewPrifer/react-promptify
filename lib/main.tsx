@@ -1,21 +1,30 @@
-import { ReactNode } from "react";
-import { Prompt, PromptFn, dispatch, useStore } from "./Store";
-import { genId } from "./utils";
+import { FC, ReactNode } from "react";
+import { PromptFn, createPrompt, dispatch, useStore } from "./Store";
 
-const createPrompt = (children: ReactNode): Prompt => {
-  return {
+interface PrompterProps {
+  /**
+   * A function that takes a `children` and `open` prop and returns a React element.
+   * @returns
+   */
+  children: ({
     children,
-    id: genId(),
-  };
-};
+    open,
+  }: {
+    children: ReactNode;
+    open: boolean;
+  }) => ReactNode;
+}
 
 /**
  * The component that renders the prompt. Place it wherever you want the prompt to appear.
  */
-const Prompter = () => {
+const Prompter: FC<PrompterProps> = ({ children }) => {
   const store = useStore();
 
-  return store.renderStack[0]?.children;
+  return children({
+    children: store.renderStack[0]?.children,
+    open: store.renderStack.length > 0,
+  });
 };
 
 /**

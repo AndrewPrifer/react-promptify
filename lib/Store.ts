@@ -1,4 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
+import { genId } from "./utils";
 
 export type CallbackFn<T> = (value: T) => void;
 export type RenderFn<T> = (callback: CallbackFn<T>) => React.ReactElement;
@@ -27,6 +28,13 @@ const listeners: Array<(state: State) => void> = [];
 
 let memoryState: State = {
   renderStack: [],
+};
+
+export const createPrompt = (children: ReactNode): Prompt => {
+  return {
+    children,
+    id: genId(),
+  };
 };
 
 export const reducer = (state: State, action: Action): State => {
