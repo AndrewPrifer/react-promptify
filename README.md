@@ -43,7 +43,7 @@ function App() {
         {({ children, open }) => <SomeModal open={open}>{children}</SomeModal>}
       </Prompter>
 
-      <p>Marketing Emails Allowed: {userInfo.marketing ? "Yes" : "No"}</p>
+      <p>Marketing Emails Allowed: {allowed ? "Yes" : "No"}</p>
       <button onClick={() => setAllowed(await promptEmail())}>
         Update Details
       </button>
