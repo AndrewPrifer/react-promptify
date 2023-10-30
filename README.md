@@ -66,9 +66,10 @@ The component that renders the prompt. You can place it wherever you want the pr
 
 **Props**
 
-- `children({children, open})`: A render function that takes children and open prop and returns a modal element.
+- `children({children, open, cancel})`: A render function that takes children and open prop and returns a modal element.
   - `children: ReactNode`: The prompt contents to render.
-  - `open`: A boolean indicating whether the modal should be open or closed.
+  - `open: boolean`: A boolean indicating whether the modal should be open or closed.
+  - `cancel: () => void`: A function that closes the modal and resolves the promise with `null`.
 
 **Returns**
 
@@ -78,7 +79,11 @@ The modal element to render.
 
 ```tsx
 <Prompter>
-  {({ children, open }) => <SomeModal open={open}>{children}</SomeModal>}
+  {({ children, open, cancel }) => (
+    <SomeModal open={open} onClose={cancel}>
+      {children}
+    </SomeModal>
+  )}
 </Prompter>
 ```
 
@@ -88,11 +93,11 @@ A function you call to prompt the user. It works similarly to `window.prompt`, e
 
 **Parameters**
 
-- `render: (done) => ReactNode`: A render function that takes a `done` function and returns the prompt contents to render. The `done` function takes the data to return as an argument.
+- `render: (done) => ReactNode`: A render function that takes a `done` function and returns the prompt contents to render. The `done` function takes the data to return as argument.
 
 **Returns**
 
-A promise that resolves to the value the done function was called with.
+A promise that resolves to the value the done function was called with, or `null` if the prompt was canceled.
 
 **Example**
 

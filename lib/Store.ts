@@ -1,13 +1,16 @@
 import { ReactNode, useEffect, useState } from "react";
-import { genId } from "./utils";
+import { ControlledPromise, genId, makeControlledPromise } from "./utils";
 
 export type CallbackFn<T> = (value: T) => void;
-export type RenderFn<T> = (callback: CallbackFn<T>) => React.ReactElement;
-export type PromptFn = <T>(fn: RenderFn<T>) => Promise<T>;
+export type RenderFn<T> = (
+  callback: CallbackFn<T | null>
+) => React.ReactElement;
 
 export type Prompt = {
   children: ReactNode;
   id: string;
+  resolve: CallbackFn<unknown>;
+  promise: Promise<unknown>;
 };
 
 type Action =
@@ -17,7 +20,7 @@ type Action =
     }
   | {
       type: "REMOVE_RENDER";
-      prompt: Prompt;
+      id: string;
     };
 
 interface State {
@@ -30,10 +33,24 @@ let memoryState: State = {
   renderStack: [],
 };
 
-export const createPrompt = (children: ReactNode): Prompt => {
+export const createPrompt = (render: RenderFn<unknown>): Prompt => {
+  const id = genId();
+
+  const controlledPromise = makeControlledPromise<unknown>();
+  const publicPromise = controlledPromise.promise.then((value) => value);
+
+  const resolve = (value: unknown) => {
+    controlledPromise.resolve(value);
+    dispatch({ type: "REMOVE_RENDER", id });
+  };
+
   return {
-    children,
-    id: genId(),
+    children: render((value) => {
+      resolve(value);
+    }),
+    id,
+    resolve,
+    promise: publicPromise,
   };
 };
 
@@ -49,7 +66,7 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         renderStack: state.renderStack.filter(
-          (prompt) => prompt.id !== action.prompt.id
+          (prompt) => prompt.id !== action.id
         ),
       };
   }

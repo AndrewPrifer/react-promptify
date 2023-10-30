@@ -1,6 +1,7 @@
+"use client";
+
 import { FC, ReactNode } from "react";
 import {
-  PromptFn,
   createPrompt,
   dispatch,
   useStore,
@@ -19,6 +20,7 @@ interface PrompterProps {
   }: {
     children: ReactNode;
     open: boolean;
+    cancel: () => void;
   }) => ReactNode;
 }
 
@@ -27,10 +29,14 @@ interface PrompterProps {
  */
 const Prompter: FC<PrompterProps> = ({ children }) => {
   const store = useStore();
+  const prompt = store.renderStack[0];
 
   return children({
-    children: store.renderStack[0]?.children,
+    children: prompt?.children,
     open: store.renderStack.length > 0,
+    cancel: () => {
+      prompt?.resolve(null);
+    },
   });
 };
 
@@ -41,21 +47,11 @@ const Prompter: FC<PrompterProps> = ({ children }) => {
  * @param render A function that takes a `done` function and returns a React element.
  * @returns A promise that resolves to the value the `done` function was called with.
  */
-const prompt: PromptFn = (render) => {
-  return new Promise((resolve) => {
-    const prompt = createPrompt(
-      render((value) => {
-        resolve(value);
-        dispatch({ type: "REMOVE_RENDER", prompt });
-      })
-    );
-
-    dispatch({
-      type: "ADD_RENDER",
-      prompt,
-    });
-  });
+const prompt = <T,>(render: RenderFn<T>): Promise<T | null> => {
+  const prompt = createPrompt(render);
+  dispatch({ type: "ADD_RENDER", prompt });
+  return prompt.promise as Promise<T>;
 };
 
 export { Prompter, prompt };
-export type { PrompterProps, PromptFn, CallbackFn, RenderFn };
+export type { PrompterProps, CallbackFn, RenderFn };

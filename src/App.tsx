@@ -5,7 +5,7 @@ export function App() {
   return (
     <div>
       <Prompter>
-        {({ children, open }) =>
+        {({ children, open, cancel }) =>
           open ? (
             <div
               style={{
@@ -19,6 +19,7 @@ export function App() {
               }}
             >
               {children}
+              <button onClick={cancel}>Cancel</button>
             </div>
           ) : null
         }
@@ -112,7 +113,7 @@ const Example = () => {
   });
 
   async function updateUserDetails() {
-    setUserInfo(await promptEmail());
+    setUserInfo((await promptEmail()) ?? userInfo);
   }
 
   return (
