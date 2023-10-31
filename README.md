@@ -44,7 +44,7 @@ function App() {
       </Prompter>
 
       <p>Marketing Emails Allowed: {allowed ? "Yes" : "No"}</p>
-      <button onClick={() => setAllowed(await promptEmail())}>
+      <button onClick={async () => setAllowed(await promptEmail())}>
         Update Details
       </button>
     </div>

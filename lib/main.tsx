@@ -33,7 +33,7 @@ const Prompter: FC<PrompterProps> = ({ children }) => {
 
   return children({
     children: prompt?.children,
-    open: store.renderStack.length > 0,
+    open: prompt !== undefined,
     cancel: () => {
       prompt?.resolve(null);
     },
