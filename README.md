@@ -44,7 +44,7 @@ function App() {
       </Prompter>
 
       <p>Marketing Emails Allowed: {allowed ? "Yes" : "No"}</p>
-      <button onClick={async () => setAllowed(await promptEmail())}>
+      <button onClick={() => setAllowed(await promptEmail())}>
         Update Details
       </button>
     </div>
@@ -70,10 +70,6 @@ The component that renders the prompt. You can place it wherever you want the pr
   - `children: ReactNode`: The prompt contents to render.
   - `open: boolean`: A boolean indicating whether the modal should be open or closed.
   - `cancel: () => void`: A function that closes the modal and resolves the promise with `null`.
-- `mode: "stack" | "reversed" | "top"`: The mode in which the prompter should render modals. Defaults to `"top"`.
-  - `"stack"`: Renders the entire modal stack, with the latest last.
-  - `"reversed"`: Renders the entire modal stack, with the latest first.
-  - `"top"`: Renders only the latest modal. NB: This only affects the rendering of the modals. Older modals are not discarded, and will reappear when newer modals are resolved.
 
 **Returns**
 

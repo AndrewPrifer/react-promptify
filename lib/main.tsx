@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, Fragment, ReactNode } from "react";
+import { FC, ReactNode } from "react";
 import {
   createPrompt,
   dispatch,
@@ -22,53 +22,22 @@ interface PrompterProps {
     open: boolean;
     cancel: () => void;
   }) => ReactNode;
-  mode?: "stack" | "reversed" | "top";
 }
 
 /**
  * The component that renders the prompt. Place it wherever you want the prompt to appear.
  */
-const Prompter: FC<PrompterProps> = ({ children, mode = "top" }) => {
+const Prompter: FC<PrompterProps> = ({ children }) => {
   const store = useStore();
   const prompt = store.renderStack[0];
 
-  return mode === "top" ? (
-    children({
-      children: prompt?.children,
-      open: store.renderStack.length > 0,
-      cancel: () => {
-        prompt?.resolve(null);
-      },
-    })
-  ) : mode === "stack" ? (
-    <>
-      {store.renderStack.toReversed().map((prompt) => (
-        <Fragment key={prompt.id}>
-          {children({
-            children: prompt.children,
-            open: true,
-            cancel: () => {
-              prompt.resolve(null);
-            },
-          })}
-        </Fragment>
-      ))}
-    </>
-  ) : (
-    <>
-      {store.renderStack.map((prompt) => (
-        <Fragment key={prompt.id}>
-          {children({
-            children: prompt.children,
-            open: true,
-            cancel: () => {
-              prompt.resolve(null);
-            },
-          })}
-        </Fragment>
-      ))}
-    </>
-  );
+  return children({
+    children: prompt?.children,
+    open: store.renderStack.length > 0,
+    cancel: () => {
+      prompt?.resolve(null);
+    },
+  });
 };
 
 /**
