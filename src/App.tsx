@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Prompter, prompt } from "../lib/main";
+import { createPrompter } from "../lib/main";
+
+const { Prompter, prompt } = createPrompter();
 
 export function App() {
   return (

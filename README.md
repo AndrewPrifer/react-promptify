@@ -21,7 +21,9 @@ yarn add react-promptify
 
 ```tsx
 import { useState } from "react";
-import { Prompter, prompt } from "../lib/main";
+import { createPrompter } from "../lib/main";
+
+const { Prompter, prompt } = createPrompter();
 
 // Create a custom prompt function. We can call this anywhere in our app.
 const promptEmail = () =>
@@ -59,6 +61,21 @@ Ever noticed that whenever you just need to get a simple value from the user, yo
 With promptify, you define _once_ where and how you want to render modals, and call the `prompt()` function anywhere in your app to render a modal and get the data you need, _where_ you need it. The modal state is managed for you, you can render any content, and you can return any value you want.
 
 ## API
+
+### `createPrompter()`
+
+Creates a prompter instance. You can create as many prompters as you want. This is useful because different kinds of prompts might need different kinds of modals.
+
+**Returns**
+
+An object with the following properties: `Prompter`, `prompt`.
+
+**Example**
+
+```tsx
+const { Prompter, prompt } = createPrompter();
+const { Prompter: AlertPrompter, prompt: alert } = createPrompter();
+```
 
 ### `Prompter`
 
